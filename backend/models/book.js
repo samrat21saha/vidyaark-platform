@@ -1,42 +1,24 @@
 const mongoose = require("mongoose");
 
-const bookSchema = new mongoose.Schema({
-    url: {
-        type: String,
-        required: true, // because PDFs are free & downloadable
-    },
-      
-    title: {
-      type: String,
-      required: true,
-    },
+const bookSchema = new mongoose.Schema(
 
-    author: {
-      type: String,
-      required: true,
-    },
+  {
+    pdfUrl: { type: String, required: true },
+    coverImageUrl: { type: String, required: true },
 
-    pages: {
-      type: Number,
-      required: true,
-    },
+    title: { type: String, required: true, trim: true },
+    author: { type: String, required: true, trim: true },
 
-    price: {
-        type: Number,
-        required: true,
-    },
+    pages: { type: Number, required: true, min: 1 },
+    printPrice: { type: Number, required: true, min: 0 },
 
-    desc: {
-      type: String,
-      required: true,
-    },
+    category: {type: String,required: true,trim: true,},
 
-    lang: {
-      type: String,
-      required: true,
-    },
+    desc: { type: String, required: true },
+    lang: { type: String, required: true },
   },
   { timestamps: true }
 );
+
 
 module.exports = mongoose.model("Book", bookSchema);
